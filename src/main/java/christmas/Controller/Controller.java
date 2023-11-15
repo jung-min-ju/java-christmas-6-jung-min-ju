@@ -51,8 +51,10 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
 
         IsGift(IsGift);
         ShowDiscount(IsEvent);
-        //할인혜택에서 증정품이 있는 경우 출력
         ShowGift(IsGift);
+        //총 할인가격과 할인 후 예상 결제금액 출력
+        ShowTotalDiscountAndPayMent();
+
     }
 
     private void CheckDate(){
@@ -118,6 +120,11 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
         if(isGift){
             OutputView.PrintGiftDiscount();
         }
+    }
+
+    private void ShowTotalDiscountAndPayMent(){
+        OutputView.PrintTotalDiscount(TotalDiscount, TotalPrice);
+        OutputView.PrintPayment(TotalPrice,TotalDiscount);
     }
 
 }
