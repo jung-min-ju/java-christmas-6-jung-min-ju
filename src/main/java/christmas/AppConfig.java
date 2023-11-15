@@ -1,6 +1,7 @@
 package christmas;
 
-import christmas.Controller.Controller;
+import christmas.Controller.BenefitController;
+import christmas.Controller.OrderController;
 import christmas.Discount.DiscountService;
 import christmas.Discount.DiscountServiceImpl;
 import christmas.Gift.GiftServiceImpl;
@@ -16,8 +17,12 @@ public class AppConfig { //의존성 주입 클래스
     private final GiftService giftService = new GiftServiceImpl();
     public final DiscountService discountService = new DiscountServiceImpl();
 
-    public Controller controller(){
-        return new Controller(orderService, giftService, discountService);
+    public OrderController orderController(){
+        return new OrderController(orderService, giftService, discountService);
+    }
+
+    public BenefitController benefitcontroller(){
+        return new BenefitController(orderService, giftService, discountService);
     }
 
 }
