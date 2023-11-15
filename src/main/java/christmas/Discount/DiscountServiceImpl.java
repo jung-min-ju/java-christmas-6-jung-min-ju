@@ -7,7 +7,6 @@ import static christmas.Constant.DiscountConstant.*;
 import static christmas.Discount.StarStatus.EXISTING;
 
 public class DiscountServiceImpl implements DiscountService {
-
     private StarStatus starstatus;
     private WeekType weekType;
     private int ChristDiscount = 0;
