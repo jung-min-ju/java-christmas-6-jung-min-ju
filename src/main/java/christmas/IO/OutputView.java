@@ -100,4 +100,5 @@ public class OutputView {
         System.out.println("<12월 이벤트 배지>\n" + bedge);
     }
 
+
 }
