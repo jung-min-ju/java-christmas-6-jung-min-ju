@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OrderService {
     void createOrder(String Menu);
+    void showOrder();
+    int getAllPrice();
 }

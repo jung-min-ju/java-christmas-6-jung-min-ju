@@ -32,7 +32,6 @@ public class OrderServiceImpl implements OrderService {
         TotalPrice = 0;
     }
 
-    //createOrder 구현
     @Override
     public void createOrder(String OrderInput) { //OrderInput 예시) 타파스-1,제로콜라-1
         String[] orderItems = ParsingMenu.CountMenu(OrderInput);
@@ -58,9 +57,26 @@ public class OrderServiceImpl implements OrderService {
         return new OrderDto(ExistsMenu,MenuQuantity); //구분자를 분리한 후, 해당 정보를 담은 OrdeDto 객체 반환
     }
 
+
+    @Override
+    public void showOrder() {
+        OutputView.PrintOrderTitle();
+        for(OrderDto orderDto : Order){
+            MenuDto menuDto = orderDto.getMenu();
+            OutputView.PrintOrder(menuDto.getMenuName(),orderDto.getQuantity());
+        }
+        OutputView.Null();
+    }
+
+
     private void sumTotalPrice(OrderDto orderDto) {
         MenuDto menuDto = orderDto.getMenu();
         TotalPrice+= (menuDto.getMenuPrice() * orderDto.getQuantity());
+    }
+
+    @Override
+    public int getAllPrice() {
+        return TotalPrice;
     }
 
 
@@ -70,6 +86,5 @@ public class OrderServiceImpl implements OrderService {
             TotalDrink++;
         }
     }
-
 
 }
