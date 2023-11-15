@@ -37,12 +37,19 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
         ShowTodayBenefits();
     }
 
-    //끝
     public void ShowMenuAndTotalPrice(){ //메뉴 및 전체 가격 출력
         orderService.showOrder();
         TotalPrice = orderService.getAllPrice();
         giftService.CheckGift(TotalPrice); //증정품 줘야하는지 확인
         OutputView.PrintAllPrice(TotalPrice);
+    }
+
+    public void ShowBenefits(){
+        boolean IsEvent = TotalPrice >= EVENTSTANDARD; //구매가격이 이벤트 기준 가격보다 작다면, 이벤트는 발생하지 않음
+        boolean IsGift = giftService.getGift();
+
+        //IsGfit 함수
+        IsGift(IsGift);
     }
 
     private void CheckDate(){
@@ -83,6 +90,9 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
         discountService.TodayBenefits(Date);
     }
 
+    private void IsGift(boolean isGift){
+        OutputView.PrintGiftMenu(isGift);
+    }
 
 }
 
