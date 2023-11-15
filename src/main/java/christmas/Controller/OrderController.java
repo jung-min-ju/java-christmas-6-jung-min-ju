@@ -1,12 +1,18 @@
 package christmas.Controller;
 
 import christmas.Constant.MenuConstant;
+import christmas.Discount.BenefitDto;
 import christmas.Discount.DiscountService;
 import christmas.Gift.GiftService;
 import christmas.IO.InputView;
 import christmas.IO.OutputView;
+import christmas.Menu.MenuDto;
+import christmas.Order.OrderDto;
 import christmas.Order.OrderService;
 import christmas.Util.Validate;
+
+import java.util.List;
+import java.util.Map;
 
 public class OrderController {
     private final OrderService orderService;
@@ -28,10 +34,15 @@ public class OrderController {
         ShowTodayBenefits();
     }
 
-    public void ShowMenuAndTotalPrice(){ //메뉴 및 전체 가격 출력
-        orderService.showOrder();
+    public void ShowMenuAndTotalPrice() {
+        OutputView.PrintOrderTitle();
+        List<OrderDto> orders = orderService.showOrder();
+        for(OrderDto order : orders) {
+            MenuDto menu = order.getMenu();
+            OutputView.PrintOrder(menu.getMenuName(), order.getQuantity());
+        }
         TotalPrice = orderService.getAllPrice();
-        giftService.CheckGift(TotalPrice); //증정품 줘야하는지 확인
+        giftService.CheckGift(TotalPrice);
         OutputView.PrintAllPrice(TotalPrice);
     }
 
@@ -68,9 +79,12 @@ public class OrderController {
         }
     }
 
-    private void ShowTodayBenefits(){ //해당 날짜에 받을 수 있는 혜택을 사용자에게 알려주는 함수. 직접 추가한 기능임
+    private void ShowTodayBenefits(){
         OutputView.PrintTodatDate(Date);
-        discountService.TodayBenefits(Date);
+        BenefitDto benefits = discountService.TodayBenefits(Date);
+
+        OutputView.PrintTodayBenefits(benefits);
+        OutputView.Null();
     }
 
 

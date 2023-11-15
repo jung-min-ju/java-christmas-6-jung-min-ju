@@ -1,6 +1,5 @@
 package christmas.Discount;
 
-import christmas.IO.OutputView;
 import java.util.List;
 
 import static christmas.Constant.DateConstant.CHRISTMAS;
@@ -8,6 +7,7 @@ import static christmas.Constant.DiscountConstant.*;
 import static christmas.Discount.StarStatus.EXISTING;
 
 public class DiscountServiceImpl implements DiscountService {
+
     private StarStatus starstatus;
     private WeekType weekType;
     private int ChristDiscount = 0;
@@ -15,24 +15,14 @@ public class DiscountServiceImpl implements DiscountService {
     private int TotalWeekDiscount=0;
 
     @Override
-    public void TodayBenefits(int dateInput){
+    public BenefitDto TodayBenefits(int dateInput){
         starstatus = StarStatus.determineStatus(dateInput);
         weekType =  weekType.determineWeekStatus(dateInput);
         ChristDiscount = ChristmasDiscount(dateInput);
         StarDiscount = StarDiscount(starstatus);
 
-        OutputView.PrintTodayBenefits(ChristDiscount,starstatus,weekType);
-    }
-
-    @Override
-    public int ShowAllDiscount(int totalPrice) {
-        int TotalDiscount=0;
-        TotalDiscount += StarDiscount;
-        TotalDiscount += ChristDiscount;
-        TotalDiscount += TotalWeekDiscount; //평일주말할인
-
-        PrintAllDiscounts();
-        return TotalDiscount;
+        BenefitDto benefits = new BenefitDto(ChristDiscount,starstatus,weekType);
+        return benefits;
     }
 
     private int ChristmasDiscount(int dateInput){
@@ -49,12 +39,23 @@ public class DiscountServiceImpl implements DiscountService {
         return NONESTARDISCOUNT;
     }
 
-    private void PrintAllDiscounts(){
-        OutputView.PrintYesDiscount();
-        OutputView.printChristmasDiscount(ChristDiscount);
-        OutputView.printSpecialDiscount(starstatus);
-        OutputView.printWeekDiscount(weekType, TotalWeekDiscount);
+    @Override
+    public int ReturnTotalDiscount(int totalPrice) {
+        int TotalDiscount=0;
+        TotalDiscount += StarDiscount;
+        TotalDiscount += ChristDiscount;
+        TotalDiscount += TotalWeekDiscount; //평일주말할인
 
+        return TotalDiscount;
+    }
+
+    public BenefitDto PrintAllDiscounts(){
+        return new BenefitDto(ChristDiscount, starstatus, weekType);
+    }
+
+    @Override
+    public int getTotalWeekDiscount() {
+        return TotalWeekDiscount;
     }
 
     @Override

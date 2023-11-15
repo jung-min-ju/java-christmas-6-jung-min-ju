@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrderService {
     void createOrder(String Menu);
-    void showOrder();
+    List<OrderDto> showOrder();
     int getAllPrice();
     List<Integer> FindDiscountOrder(WeekType weekType);
 }

@@ -1,13 +1,11 @@
 package christmas.Order;
 
 import christmas.Discount.WeekType;
-import christmas.IO.OutputView;
 import christmas.Menu.MenuDto;
 import christmas.Menu.MenuRepository;
 import christmas.Menu.MenuType;
 import christmas.Util.ParsingMenu;
 import christmas.Util.Validate;
-import net.bytebuddy.implementation.bytecode.Throw;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -57,17 +55,10 @@ public class OrderServiceImpl implements OrderService {
         return new OrderDto(ExistsMenu,MenuQuantity); //구분자를 분리한 후, 해당 정보를 담은 OrdeDto 객체 반환
     }
 
-
     @Override
-    public void showOrder() {
-        OutputView.PrintOrderTitle();
-        for(OrderDto orderDto : Order){
-            MenuDto menuDto = orderDto.getMenu();
-            OutputView.PrintOrder(menuDto.getMenuName(),orderDto.getQuantity());
-        }
-        OutputView.Null();
+    public List<OrderDto> showOrder() {
+        return Order;
     }
-
 
     private void sumTotalPrice(OrderDto orderDto) {
         MenuDto menuDto = orderDto.getMenu();

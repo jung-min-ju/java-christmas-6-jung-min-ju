@@ -1,6 +1,7 @@
 package christmas.Controller;
 
 import christmas.Discount.Badge;
+import christmas.Discount.BenefitDto;
 import christmas.Discount.DiscountService;
 import christmas.Discount.WeekType;
 import christmas.Gift.GiftService;
@@ -49,7 +50,12 @@ public class BenefitController { //사용자의 요청에 대해 필요한 로�
         }
         int TotalPrice = orderService.getAllPrice();
         CalculateWeekDiscount(); //주말, 주중 할인계산 함수 필요
-        TotalDiscount=discountService.ShowAllDiscount(TotalPrice); //할인 출력
+
+        OutputView.PrintYesDiscount();
+        TotalDiscount=discountService.ReturnTotalDiscount(TotalPrice); //할인 출력
+        BenefitDto benefits = discountService.PrintAllDiscounts();
+        int totalWeekDiscount = discountService.getTotalWeekDiscount();
+        OutputView.PrintAllDiscounts(benefits,totalWeekDiscount);
     }
 
     private void CalculateWeekDiscount(){

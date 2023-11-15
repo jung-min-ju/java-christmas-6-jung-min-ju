@@ -1,13 +1,17 @@
 package christmas.IO;
 
+import christmas.Discount.BenefitDto;
 import christmas.Discount.StarStatus;
 import christmas.Discount.WeekType;
 
+import java.util.List;
+import java.util.Map;
+
 import static christmas.Constant.DateConstant.MONTH;
-import static christmas.Constant.DiscountConstant.CHRISTMASEVENTEND;
-import static christmas.Constant.DiscountConstant.EXCISTINGSTARDISCOUNT;
+import static christmas.Constant.DiscountConstant.*;
 import static christmas.Constant.GiftConstant.*;
 import static christmas.Discount.StarStatus.EXISTING;
+import static christmas.Discount.StarStatus.NONE;
 import static christmas.Util.Formatter.formatPrice;
 import static christmas.Util.ParsingWeekDescription.parseDescription;
 
@@ -28,15 +32,18 @@ public class OutputView {
     public static void PrintTodatDate(int date){
         System.out.println(MONTH+"월 "+date+"일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
     }
+    public static void PrintTodayBenefits(BenefitDto benefits){
+        int ChristDiscount = benefits.getChristDiscount();
+        StarStatus starStatus = benefits.getStarStatus();
+        WeekType weekType = benefits.getWeekType();
 
-    public static void PrintTodayBenefits(int ChrsitDiscount, StarStatus starStatus, WeekType weekType){
-        if(ChrsitDiscount!=CHRISTMASEVENTEND){
-            System.out.println("* 크리스마스 혜택 : "+formatPrice(ChrsitDiscount)+"원 할인");
+        if(ChristDiscount != CHRISTMASEVENTEND){
+            System.out.println("* 크리스마스 혜택 : "+ formatPrice(ChristDiscount) +"원 할인");
         }
-        if(starStatus==EXISTING){
-            System.out.println("* 별이 있는 날! : " + formatPrice(EXCISTINGSTARDISCOUNT)+"원 할인");
+        if(starStatus != NONE){
+            System.out.println("* 별이 있는 날! : " + formatPrice(EXCISTINGSTARDISCOUNT) +"원 할인");
         }
-        System.out.println("* "+weekType.getDescription()+"("+formatPrice(weekType.getDiscount())+"원이 각 메뉴당 할인)\n");
+        System.out.println("* "+ weekType.getDescription()+"("+ formatPrice(weekType.getDiscount()) +"원이 각 메뉴당 할인)");
     }
 
     public static void PrintOrderTitle(){
@@ -70,13 +77,19 @@ public class OutputView {
         System.out.println("<혜택 내역>");
     }
 
-    public static void printChristmasDiscount(int christDiscount) {
+    public static void PrintAllDiscounts(BenefitDto benefit, int totalWeekDiscount){
+        printChristmasDiscount(benefit.getChristDiscount());
+        printSpecialDiscount(benefit.getStarStatus());
+        printWeekDiscount(benefit.getWeekType(),totalWeekDiscount);
+    }
+
+    private static void printChristmasDiscount(int christDiscount) {
         if (christDiscount != CHRISTMASEVENTEND) {
             System.out.println("크리스마스 디데이 할인: -" + formatPrice(christDiscount) + "원");
         }
     }
 
-    public static void printSpecialDiscount(StarStatus starStatus) {
+    private static void printSpecialDiscount(StarStatus starStatus) {
         if (starStatus == EXISTING) {
             System.out.println("특별 할인: -" + formatPrice(EXCISTINGSTARDISCOUNT) + "원");
         }
@@ -91,7 +104,6 @@ public class OutputView {
         }
         System.out.println(WeekPrice+"원");
     }
-
 
     public static void PrintGiftDiscount(){
         System.out.println("증정 이벤트: " + "-" +formatPrice(GIFTPRICE)+"원\n");
