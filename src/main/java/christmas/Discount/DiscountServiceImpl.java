@@ -5,11 +5,13 @@ import java.util.List;
 
 import static christmas.Constant.DateConstant.CHRISTMAS;
 import static christmas.Constant.DiscountConstant.*;
+import static christmas.Discount.StarStatus.EXISTING;
 
 public class DiscountServiceImpl implements DiscountService {
     private StarStatus starstatus;
     private WeekType weekType;
     private int ChristDiscount = 0;
+    private int StarDiscount = 0;
     private int TotalWeekDiscount=0;
 
     @Override
@@ -17,6 +19,7 @@ public class DiscountServiceImpl implements DiscountService {
         starstatus = StarStatus.determineStatus(dateInput);
         weekType =  weekType.determineWeekStatus(dateInput);
         ChristDiscount = ChristmasDiscount(dateInput);
+        StarDiscount = StarDiscount(starstatus);
 
         OutputView.PrintTodayBenefits(ChristDiscount,starstatus,weekType);
     }
@@ -24,7 +27,7 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public int ShowAllDiscount(int totalPrice) {
         int TotalDiscount=0;
-        TotalDiscount += STARDISCOUNT;
+        TotalDiscount += StarDiscount;
         TotalDiscount += ChristDiscount;
         TotalDiscount += TotalWeekDiscount; //평일주말할인
         OutputView.PrintAllDiscount(ChristDiscount, weekType, TotalWeekDiscount, starstatus);
@@ -37,6 +40,14 @@ public class DiscountServiceImpl implements DiscountService {
         }
         return CHRISTBASICDISCOUNT + ((dateInput-1)*100);
     }
+
+    private int StarDiscount(StarStatus starstatus){
+        if(starstatus==EXISTING){
+            return EXCISTINGSTARDISCOUNT;
+        }
+        return NONESTARDISCOUNT;
+    }
+
 
     @Override
     public WeekType getWeekType() {
