@@ -29,7 +29,7 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
         this.giftService = giftService;
         this.discountService = discountService;
     }
-    //끝
+    //Reservatin 함수 구현
     public void Reservation(){
         CheckDate();
         CheckMenu();
@@ -74,6 +74,7 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
         OutputView.PrintTodatDate(Date);
         discountService.TodayBenefits(Date);
     }
+
 
 }
 
