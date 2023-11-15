@@ -21,6 +21,16 @@ public class DiscountServiceImpl implements DiscountService {
         OutputView.PrintTodayBenefits(ChristDiscount,starstatus,weekType);
     }
 
+    @Override
+    public int ShowAllDiscount(int totalPrice) {
+        int TotalDiscount=0;
+        TotalDiscount += STARDISCOUNT;
+        TotalDiscount += ChristDiscount;
+        TotalDiscount += TotalWeekDiscount; //평일주말할인
+        OutputView.PrintAllDiscount(ChristDiscount, weekType, TotalWeekDiscount, starstatus);
+        return TotalDiscount;
+    }
+
     private int ChristmasDiscount(int dateInput){
         if(dateInput>CHRISTMAS){
             return CHRISTMASEVENTEND;
