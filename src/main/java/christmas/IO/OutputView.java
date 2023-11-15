@@ -39,4 +39,11 @@ public class OutputView {
         System.out.println("* "+weekType.getDescription()+"("+formatPrice(weekType.getDiscount())+"원이 각 메뉴당 할인)\n");
     }
 
+
+    public static void PrintAllPrice(int price){
+        System.out.println("<할인 전 총주문 금액>");
+        System.out.println(formatPrice(price) + "원\n");
+    }
+
+
 }
