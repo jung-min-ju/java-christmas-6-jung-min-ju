@@ -48,8 +48,10 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
         boolean IsEvent = TotalPrice >= EVENTSTANDARD; //구매가격이 이벤트 기준 가격보다 작다면, 이벤트는 발생하지 않음
         boolean IsGift = giftService.getGift();
 
-        //IsGfit 함수
+
         IsGift(IsGift);
+        //ShowDiscount 함수
+        ShowDiscount(IsEvent);
     }
 
     private void CheckDate(){
@@ -92,6 +94,23 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
 
     private void IsGift(boolean isGift){
         OutputView.PrintGiftMenu(isGift);
+    }
+
+    private void ShowDiscount(boolean isEvent){
+        if(!isEvent){
+            OutputView.PrintNoDiscount();
+            return;
+        }
+        int TotalPrice = orderService.getAllPrice();
+        CalculateWeekDiscount(); //주말, 주중 할인계산 함수 필요
+        TotalDiscount=discountService.ShowAllDiscount(TotalPrice); //할인 출력
+    }
+
+    private void CalculateWeekDiscount(){
+        WeekType weekType = discountService.getWeekType();
+        List<Integer> DiscountTarget = orderService.FindDiscountOrder(weekType);
+
+        discountService.sumWeekDiscount(DiscountTarget, weekType);
     }
 
 }
