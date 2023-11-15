@@ -30,7 +30,8 @@ public class DiscountServiceImpl implements DiscountService {
         TotalDiscount += StarDiscount;
         TotalDiscount += ChristDiscount;
         TotalDiscount += TotalWeekDiscount; //평일주말할인
-        OutputView.PrintAllDiscounts(ChristDiscount, weekType, TotalWeekDiscount, starstatus);
+
+        PrintAllDiscounts();
         return TotalDiscount;
     }
 
@@ -48,6 +49,13 @@ public class DiscountServiceImpl implements DiscountService {
         return NONESTARDISCOUNT;
     }
 
+    private void PrintAllDiscounts(){
+        OutputView.PrintYesDiscount();
+        OutputView.printChristmasDiscount(ChristDiscount);
+        OutputView.printSpecialDiscount(starstatus);
+        OutputView.printWeekDiscount(weekType, TotalWeekDiscount);
+
+    }
 
     @Override
     public WeekType getWeekType() {

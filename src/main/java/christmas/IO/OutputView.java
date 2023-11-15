@@ -66,26 +66,23 @@ public class OutputView {
         System.out.println("없음\n");
     }
 
-    public static void PrintAllDiscounts(int christDiscount, WeekType weekType, int weekTotalDiscount, StarStatus starStatus) {
+    public static void PrintYesDiscount(){
         System.out.println("<혜택 내역>");
-        printChristmasDiscount(christDiscount);
-        printSpecialDiscount(starStatus);
-        printWeekDiscount(weekType, weekTotalDiscount);
     }
 
-    private static void printChristmasDiscount(int christDiscount) {
+    public static void printChristmasDiscount(int christDiscount) {
         if (christDiscount != CHRISTMASEVENTEND) {
             System.out.println("크리스마스 디데이 할인: -" + formatPrice(christDiscount) + "원");
         }
     }
 
-    private static void printSpecialDiscount(StarStatus starStatus) {
+    public static void printSpecialDiscount(StarStatus starStatus) {
         if (starStatus == EXISTING) {
             System.out.println("특별 할인: -" + formatPrice(EXCISTINGSTARDISCOUNT) + "원");
         }
     }
 
-    private static void printWeekDiscount(WeekType weekType, int weekTotalDiscount) {
+    public static void printWeekDiscount(WeekType weekType, int weekTotalDiscount) {
         String description = parseDescription(weekType.getDescription());
         String WeekPrice = formatPrice(weekTotalDiscount);
         System.out.print(description+": ");
