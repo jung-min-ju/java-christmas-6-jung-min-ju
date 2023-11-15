@@ -1,8 +1,8 @@
     package christmas.Discount;
 
-    import christmas.Util.JudgeWeek;
     import static christmas.Constant.DateConstant.WEEKEND;
     import static christmas.Constant.WeekConstant.*;
+    import static christmas.Util.Judge.ReturnJudgeWeek;
 
     public enum WeekType { //상태와 행위를 한곳에서 관리
         WEEKDAYTYPE (WEEKDAYTARGET, WEEKDAYDESCRIPTION, WEEKDISCOUNT),
@@ -19,7 +19,7 @@
         }
 
         public static WeekType determineWeekStatus(int DateInput) {
-            String weekType = JudgeWeek.ReturnJudgeWeek(DateInput);
+            String weekType = ReturnJudgeWeek(DateInput);
             if(weekType == WEEKEND)  {
                 return WEEKENDTYPE;
             }
