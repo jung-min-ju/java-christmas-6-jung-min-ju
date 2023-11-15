@@ -32,4 +32,22 @@ public class Validate {
         throw new IllegalArgumentException(UNCORRECTORDER + " (메뉴가 존재하지 않습니다.)\n");
     }
 
+    public static void isQualityValid(OrderDto orderDto) {
+        int quantity = orderDto.getQuantity();
+        if(quantity <= 0) {
+            throw new IllegalArgumentException(UNCORRECTORDER + " (메뉴의 수량이 유효하지 않습니다.)");
+        }
+    }
+
+    public static void CheckOrderValidate(int TotalDrink, int orderSize, int duplicateSize){
+        if(!(duplicateSize == orderSize)){
+            throw new IllegalArgumentException(UNCORRECTORDER + " (메뉴를 중복해서 입력할 수 없습니다.)");
+        }
+        if(TotalDrink == orderSize){
+            throw new IllegalArgumentException(UNCORRECTORDER + " (음료수만 주문할 수 없습니다.)");
+        }
+        if(orderSize > 20){
+            throw new IllegalArgumentException(UNCORRECTORDER + " (메뉴는 최대 20개만 주문 가능합니다.)");
+        }
+    }
 }
