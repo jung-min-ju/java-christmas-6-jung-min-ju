@@ -30,7 +30,7 @@ public class DiscountServiceImpl implements DiscountService {
         TotalDiscount += StarDiscount;
         TotalDiscount += ChristDiscount;
         TotalDiscount += TotalWeekDiscount; //평일주말할인
-        OutputView.PrintAllDiscount(ChristDiscount, weekType, TotalWeekDiscount, starstatus);
+        OutputView.PrintAllDiscounts(ChristDiscount, weekType, TotalWeekDiscount, starstatus);
         return TotalDiscount;
     }
 
