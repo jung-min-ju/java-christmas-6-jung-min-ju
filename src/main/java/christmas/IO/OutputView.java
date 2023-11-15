@@ -61,4 +61,9 @@ public class OutputView {
         System.out.println("없음"+"\n");
     }
 
+    public static void PrintNoDiscount(){
+        System.out.println("<혜택 내역>");
+        System.out.println("없음\n");
+    }
+
 }
