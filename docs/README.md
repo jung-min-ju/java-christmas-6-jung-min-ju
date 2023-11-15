@@ -26,6 +26,7 @@ christmas
 ## Controller 디렉터리
 * Controller : 클라이언트 역할을 해줄 클래스.
 ```
+<주요함수>
 * Reservation() : 사용자의 예약을 도와줌
 * ShowMenuAndTotalPrice : 사용자에게 입력된 메뉴와 총 가격을 보여줌
 * ShowBenefits() : 사용자에게 혜택 내용을 보여줌
