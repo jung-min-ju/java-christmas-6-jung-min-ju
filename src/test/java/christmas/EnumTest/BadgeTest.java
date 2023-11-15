@@ -17,8 +17,8 @@ class BadgeTest {
         Assertions.assertEquals(Badge.별, Badge.getBadge(5500));
 
         // 10000보다 크거나 같은 경우 "TREE" 반환
-        Assertions.assertEquals(Badge.나무, Badge.getBadge(10000));
-        Assertions.assertEquals(Badge.나무, Badge.getBadge(10500));
+        Assertions.assertEquals(Badge.트리, Badge.getBadge(10000));
+        Assertions.assertEquals(Badge.트리, Badge.getBadge(10500));
 
         // 20000보다 크거나 같은 경우 "SANTA" 반환
         Assertions.assertEquals(Badge.산타, Badge.getBadge(20000));
