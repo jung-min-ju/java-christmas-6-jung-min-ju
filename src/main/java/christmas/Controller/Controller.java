@@ -29,12 +29,20 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
         this.giftService = giftService;
         this.discountService = discountService;
     }
-    //Reservatin 함수 구현
+
     public void Reservation(){
         CheckDate();
         CheckMenu();
         Order();
         ShowTodayBenefits();
+    }
+
+    //끝
+    public void ShowMenuAndTotalPrice(){ //메뉴 및 전체 가격 출력
+        orderService.showOrder();
+        TotalPrice = orderService.getAllPrice();
+        giftService.CheckGift(TotalPrice); //증정품 줘야하는지 확인
+        OutputView.PrintAllPrice(TotalPrice);
     }
 
     private void CheckDate(){
