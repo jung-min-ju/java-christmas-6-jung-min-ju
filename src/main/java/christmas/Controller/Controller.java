@@ -52,9 +52,9 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
         IsGift(IsGift);
         ShowDiscount(IsEvent);
         ShowGift(IsGift);
-        //총 할인가격과 할인 후 예상 결제금액 출력
         ShowTotalDiscountAndPayMent();
 
+        DetermineBedge(IsEvent);
     }
 
     private void CheckDate(){
@@ -125,6 +125,15 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
     private void ShowTotalDiscountAndPayMent(){
         OutputView.PrintTotalDiscount(TotalDiscount, TotalPrice);
         OutputView.PrintPayment(TotalPrice,TotalDiscount);
+    }
+
+    private void DetermineBedge(boolean isEvent){
+        int totalDiscount = TotalDiscount;
+        if(isEvent){
+            totalDiscount += GIFTPRICE;
+        }
+        Badge bedge = Badge.getBadge(totalDiscount);
+        OutputView.PrintBedge(bedge);
     }
 
 }
