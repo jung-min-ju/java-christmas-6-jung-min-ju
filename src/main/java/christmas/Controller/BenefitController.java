@@ -36,7 +36,7 @@ public class BenefitController { //사용자의 요청에 대해 필요한 로�
         ShowGift(IsGift);
         ShowTotalDiscountAndPayMent();
 
-        DetermineBedge(IsEvent);
+        DetermineBedge(IsEvent, IsGift);
     }
 
 
@@ -72,9 +72,9 @@ public class BenefitController { //사용자의 요청에 대해 필요한 로�
         OutputView.PrintPayment(TotalPrice,TotalDiscount);
     }
 
-    private void DetermineBedge(boolean isEvent){
+    private void DetermineBedge(boolean isEvent, boolean isGift ){
         int totalDiscount = TotalDiscount;
-        if(isEvent){
+        if(isEvent&&isGift){
             totalDiscount += GIFTPRICE;
         }
         Badge bedge = Badge.getBadge(totalDiscount);
