@@ -10,7 +10,7 @@ import static christmas.Constant.DiscountConstant.NONESTARDAY;
 import static christmas.Constant.DiscountConstant.STARDAY;
 import static java.time.DayOfWeek.*;
 
-public class Judge { //주말인지 주중인지 판단해주는 클래스
+public class Judge {
     public static String ReturnJudgeWeek(int DateInput){
         int Year = DateConstant.YEAR;
         int Month = DateConstant.MONTH;
