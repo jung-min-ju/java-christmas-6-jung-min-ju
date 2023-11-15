@@ -1,15 +1,17 @@
 package christmas;
 
-import christmas.Controller.Controller;
+import christmas.Controller.BenefitController;
+import christmas.Controller.OrderController;
 
 public class Application {
     public static void main(String[] args) {
         AppConfig appConfig = new AppConfig();
-        Controller controller = appConfig.controller();
+        BenefitController benefitController = appConfig.benefitcontroller();
+        OrderController orderController = appConfig.orderController();
 
         //클라이언트 역할
-        controller.Reservation();
-        controller.ShowMenuAndTotalPrice();
-        controller.ShowBenefits();
+        orderController.Reservation();
+        orderController.ShowMenuAndTotalPrice();
+        benefitController.ShowBenefits();
     }
 }
