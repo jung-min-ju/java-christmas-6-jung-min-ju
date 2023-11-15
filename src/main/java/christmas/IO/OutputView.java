@@ -95,4 +95,9 @@ public class OutputView {
         int AfterDiscount = totalPrice - totalCount;
         System.out.println("<할인 후 예상 결제 금액>\n" + formatPrice(AfterDiscount)+"원\n");
     }
+
+    public static <Bedge> void PrintBedge(Bedge bedge){
+        System.out.println("<12월 이벤트 배지>\n" + bedge);
+    }
+
 }
