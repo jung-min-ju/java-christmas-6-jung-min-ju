@@ -80,5 +80,19 @@ public class OutputView {
         System.out.println("증정 이벤트: " + "-" +formatPrice(GIFTPRICE)+"원\n");
     }
 
+    public static void PrintTotalDiscount(int totalCount, int totalPrice){
+        System.out.println("<총혜택 금액>");
+        if(totalPrice>=GIFTSTANDARD){
+            totalCount+=GIFTPRICE;
+        }
+        if(totalCount!=0){
+            System.out.print("-");
+        }
+        System.out.println(formatPrice(totalCount)+"원\n");
+    }
 
+    public static void PrintPayment(int totalPrice, int totalCount){
+        int AfterDiscount = totalPrice - totalCount;
+        System.out.println("<할인 후 예상 결제 금액>\n" + formatPrice(AfterDiscount)+"원\n");
+    }
 }
