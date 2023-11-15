@@ -50,8 +50,9 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
 
 
         IsGift(IsGift);
-        //ShowDiscount 함수
         ShowDiscount(IsEvent);
+        //할인혜택에서 증정품이 있는 경우 출력
+        ShowGift(IsGift);
     }
 
     private void CheckDate(){
@@ -111,6 +112,12 @@ public class Controller { //사용자의 요청에 대해 필요한 로직 호�
         List<Integer> DiscountTarget = orderService.FindDiscountOrder(weekType);
 
         discountService.sumWeekDiscount(DiscountTarget, weekType);
+    }
+
+    private void ShowGift(boolean isGift){
+        if(isGift){
+            OutputView.PrintGiftDiscount();
+        }
     }
 
 }
