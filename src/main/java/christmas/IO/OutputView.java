@@ -89,7 +89,7 @@ public class OutputView {
         String description = parseDescription(weekType.getDescription());
         String WeekPrice = formatPrice(weekTotalDiscount);
         System.out.print(description+": ");
-        if(WeekPrice!="0"){
+        if(!WeekPrice.equals("0")){
             System.out.print("-");
         }
         System.out.println(WeekPrice+"원");
