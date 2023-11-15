@@ -28,4 +28,17 @@ public class DiscountServiceImpl implements DiscountService {
         return CHRISTBASICDISCOUNT + ((dateInput-1)*100);
     }
 
+    @Override
+    public WeekType getWeekType() {
+        return weekType;
+    }
+
+    @Override
+    public void sumWeekDiscount(List<Integer> DiscountTarget, WeekType weekType) {
+        int TargetDiscount = weekType.getDiscount();
+
+        for(int TargetQuantity : DiscountTarget){
+            TotalWeekDiscount += TargetQuantity*TargetDiscount; //메뉴 1개당 할인을 적용해주는 계산 로직
+        }
+    }
 }
