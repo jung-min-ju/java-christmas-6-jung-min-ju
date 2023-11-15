@@ -8,4 +8,5 @@ public interface OrderService {
     void createOrder(String Menu);
     void showOrder();
     int getAllPrice();
+    List<Integer> FindDiscountOrder(WeekType weekType);
 }

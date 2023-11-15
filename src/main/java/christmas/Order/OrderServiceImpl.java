@@ -79,6 +79,20 @@ public class OrderServiceImpl implements OrderService {
         return TotalPrice;
     }
 
+    @Override
+    public List<Integer> FindDiscountOrder(WeekType weekType) { //평일인지 주말인지 나타내는 weekType 변수 외부에서 받아옴
+        List<Integer> DiscountTargetQuantity = new ArrayList<>();
+        for (OrderDto orderDto : Order) {
+            MenuDto menuDto = orderDto.getMenu();
+            String Target = weekType.getTarget(); //평일or주말에 대한 할인메뉴가 담긴 weekType.getTarget()의 반환값을 Target 변수에 저장
+            String menuType = String.valueOf(menuDto.getMenuType());
+
+            if(Target == menuType){ //order 정보들을 순환하며 찾던 Target과 메뉴타입이 맞다면
+                DiscountTargetQuantity.add(orderDto.getQuantity()); //해당 order 객체의 quqntity를 DiscountTargetQuantity 리스트에 저장
+            }
+        }
+        return DiscountTargetQuantity;
+    }
 
     private void CountDrink(MenuDto menuDto){
         MenuType menuType = menuDto.getMenuType();
