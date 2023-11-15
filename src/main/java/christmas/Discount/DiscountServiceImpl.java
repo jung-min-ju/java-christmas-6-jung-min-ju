@@ -41,14 +41,19 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public int ReturnTotalDiscount(int totalPrice) {
-        int TotalDiscount=0;
-        TotalDiscount += StarDiscount;
-        TotalDiscount += ChristDiscount;
-        TotalDiscount += TotalWeekDiscount; //평일주말할인
-
-        return TotalDiscount;
+        return StarDiscount + ChristDiscount + TotalWeekDiscount;
     }
 
+    @Override
+    public void sumWeekDiscount(List<Integer> DiscountTarget, WeekType weekType) {
+        int TargetDiscount = weekType.getDiscount();
+
+        for(int TargetQuantity : DiscountTarget){
+            TotalWeekDiscount += TargetQuantity*TargetDiscount; //메뉴 1개당 할인을 적용해주는 계산 로직
+        }
+    }
+
+    @Override
     public BenefitDto PrintAllDiscounts(){
         return new BenefitDto(ChristDiscount, starstatus, weekType);
     }
@@ -63,12 +68,4 @@ public class DiscountServiceImpl implements DiscountService {
         return weekType;
     }
 
-    @Override
-    public void sumWeekDiscount(List<Integer> DiscountTarget, WeekType weekType) {
-        int TargetDiscount = weekType.getDiscount();
-
-        for(int TargetQuantity : DiscountTarget){
-            TotalWeekDiscount += TargetQuantity*TargetDiscount; //메뉴 1개당 할인을 적용해주는 계산 로직
-        }
-    }
 }
